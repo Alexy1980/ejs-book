@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require("body-parser");
 
 const errorMiddleware = require('./middleware/error');
+const loggerMiddleware = require('./middleware/logger');
 
 const indexRouter = require('./routes/index');
 const bookApiRouter = require('./routes/api/book');
@@ -13,6 +14,8 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.set("view engine", "ejs");
+app.use(loggerMiddleware);
+
 
 app.use('/', indexRouter);
 app.use('/book', bookRouter);
